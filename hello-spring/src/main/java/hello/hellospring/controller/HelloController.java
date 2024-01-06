@@ -26,4 +26,23 @@ public class HelloController {
     public String helloString(@RequestParam("name") String name){
         return "hello " + name; // 위의 helloMvc와 차이 : view 필요 없이 data(문자)가 그대로 내려감.
     }
+
+    @GetMapping("hello-api")
+    @ResponseBody
+    public Hello helloApi(@RequestParam("name") String name){
+        Hello hello = new Hello();
+        hello.setName(name);
+        return hello;
+    }
+
+    static class Hello { // HelloController.Hello 이런식으로 쓸 수 O
+        private String name;
+
+        public String getName(){
+            return name;
+        }
+        public void setName(String name){
+            this.name = name;
+        }
+    }
 }
