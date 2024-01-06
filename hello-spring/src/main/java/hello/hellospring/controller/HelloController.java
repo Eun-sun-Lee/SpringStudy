@@ -27,8 +27,8 @@ public class HelloController {
         return "hello " + name; // 위의 helloMvc와 차이 : view 필요 없이 data(문자)가 그대로 내려감.
     }
 
-    @GetMapping("hello-api")
-    @ResponseBody
+    @GetMapping("hello-api") // API 방식
+    @ResponseBody // 기본으로 json 타입으로 반환
     public Hello helloApi(@RequestParam("name") String name){
         Hello hello = new Hello();
         hello.setName(name);
