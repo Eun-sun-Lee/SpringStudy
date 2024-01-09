@@ -6,6 +6,7 @@ import java.util.*;
 
 public class MemoryMemberRepository implements MemberRepository{
 
+    // static으로 구현 -> 객체가 아닌 클래스 단위로 붙음.
     private static Map<Long, Member> store = new HashMap<>(); // key, value : id, member 객체으로 메모리에 저장
     private static long sequence = 0L; // 자동으로 key값 생성
 
