@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@Transactional
+@Transactional // test를 실행할 때 transaction을 먼저 실행하고, query를 날려 DB에 data를 넣은 다음 rollback을 함 ->  DB에 넣었던 데이터가 반영이 안됨 .
 class MemberServiceIntegrationTest {
 
     // DI : 필드 주입 방식
