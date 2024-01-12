@@ -9,11 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public class MemberService {
     private final MemberRepository memberRepository;
 
-    @Autowired // DI -> memberService 생성시 스프링 빈에 등록된 memberRepository 객체와 연결시켜줌.
     public MemberService(MemberRepository memberRepository) { // 직접 생성 X, 외부에서ㄴㄷ주입
         this.memberRepository = memberRepository;
     }
