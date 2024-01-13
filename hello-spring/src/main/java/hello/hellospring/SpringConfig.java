@@ -21,7 +21,7 @@ public class SpringConfig {
     }
 
     @Bean // 스프링 빈으로 인식해 등록해줌.
-    public MemberSer  vice memberService(){
+    public MemberService memberService(){
         return new MemberService(memberRepository); // 스프링 빈에 등록된 memberRepository를 memberService에 넣어줌.
     }
 
