@@ -9,21 +9,28 @@ import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemoryMemberRepository;
 import hello.core.order.OrderService;
 import hello.core.order.OrderServiceImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration // application의 설정정보를 담당하는 파일
 public class AppConfig {
 
+    @Bean // 스프링 컨테이너에 등록
     public MemberService memberService() { // 어딘가에서 memberService()를 호출하면 구헌체인 memberServiceImpl가 생성
         return new MemberServiceImpl(memberRepository());
     }
 
-    private MemberRepository memberRepository() {
+    @Bean
+    public MemberRepository memberRepository() { // 스프링 컨테이너에 key-value (MemberRepository-MemoryMemberRepository) 저장
         return new MemoryMemberRepository();
     }
 
+    @Bean
     public OrderService orderService() {
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
+    @Bean
     public DiscountPolicy discountPolicy() {
 //        return new FixDiscountPolicy();
         return new RateDiscountPolicy();

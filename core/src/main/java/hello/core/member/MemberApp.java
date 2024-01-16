@@ -1,15 +1,20 @@
 package hello.core.member;
 
 import hello.core.AppConfig;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class MemberApp {
 
     public static void main(String[] args) {
-        AppConfig appConfig = new AppConfig();
-        MemberService memberService = appConfig.memberService();
-//        MemberService memberService = new MemberServiceImpl(); 기존에는 구현체를 직접 생성
-         Member member = new Member(1L, "memberA", Grade.VIP);
-         memberService.join(member);
+//        AppConfig appConfig = new AppConfig();
+//        MemberService memberService = appConfig.memberService();
+
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class); // 스프링 컨테이너 생성, AppConfig의 설정정보를 스프링 컨테이너에 등록하여 관리
+        MemberService memberService = applicationContext.getBean("memberService", MemberService.class); // (AppConfig에서 꺼낼 메소드 이름, 반환 type)
+
+        Member member = new Member(1L, "memberA", Grade.VIP);
+        memberService.join(member);
 
         Member findMember = memberService.findMember(1L);
         System.out.println("new member = " + member.getName());
