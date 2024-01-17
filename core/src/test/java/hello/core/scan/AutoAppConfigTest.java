@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.assertj.core.api.Assertions.*;
-
 public class AutoAppConfigTest {
     @Test
     void basicScan(){
