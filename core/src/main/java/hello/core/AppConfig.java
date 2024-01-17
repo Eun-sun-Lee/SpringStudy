@@ -15,18 +15,24 @@ import org.springframework.context.annotation.Configuration;
 @Configuration // application의 설정정보를 담당하는 파일
 public class AppConfig {
 
+    // @Bean memberService -> new MemoryMemberRepository()
+    // @Bean orderService -> new MemoryMemberRepository()
+
     @Bean // 스프링 컨테이너에 등록
     public MemberService memberService() { // 어딘가에서 memberService()를 호출하면 구헌체인 memberServiceImpl가 생성
+        System.out.println("AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
     public MemberRepository memberRepository() { // 스프링 컨테이너에 key-value (MemberRepository-MemoryMemberRepository) 저장
+        System.out.println("AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService() {
+        System.out.println("AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
