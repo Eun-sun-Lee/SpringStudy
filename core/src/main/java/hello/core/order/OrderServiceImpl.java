@@ -6,21 +6,17 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor // 마치 @Autowired-필드 주입처럼 동작
 public class OrderServiceImpl implements OrderService{
 
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
-
-    @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
 
     // 일반 메서드 주입
 //    @Autowired
