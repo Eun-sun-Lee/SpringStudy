@@ -28,10 +28,8 @@ public class AutoAppConfigTest {
     @Test
     @DisplayName("자바 코드로 new한 객체에는 @Autowired 적용이 안돼 직접 필드 주입 불가 (스프링 컨테이너에서 객체를 가져와야 @Autowired가 적용되는 것)")
     void fieldInjectionTest() {
-        OrderServiceImpl orderService = new OrderServiceImpl();
-        orderService.setMemberRepository(new MemoryMemberRepository());
-        orderService.setDiscountPolicy(new FixDiscountPolicy());
+//        OrderServiceImpl orderService = new OrderServiceImpl();
 
-        orderService.createOrder(1L, "itemA", 10000);
+//        orderService.createOrder(1L, "itemA", 10000);
     }
 }
