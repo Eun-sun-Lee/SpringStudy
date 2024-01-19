@@ -1,5 +1,8 @@
 package hello.core.lifecycle;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+
 public class NetworkClient { // 초기화 빈, 종료 빈
     private String url; // 접속해야 할 서버의 url
 
@@ -25,12 +28,14 @@ public class NetworkClient { // 초기화 빈, 종료 빈
         System.out.println("close: " + url);
     }
 
+    @PostConstruct
     public void init() { // 의존관계 주입이 끝나면 호출
         System.out.println("NetworkClient.init");
         connect();
         call("초기화 연결 메시지");
     }
 
+    @PreDestroy
     public void close() { // 스프링이 종료되기 전에 (소멸 전) 콜백
         System.out.println("NetworkClient.close");
         disconnect();
