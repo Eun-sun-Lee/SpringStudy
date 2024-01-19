@@ -10,6 +10,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
 
+import javax.inject.Provider;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class SingletonWithPrototypeTest1 {
@@ -43,11 +45,11 @@ public class SingletonWithPrototypeTest1 {
     static class ClientBean{
 
         @Autowired
-        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
+        private Provider<PrototypeBean> prototypeBeanProvider;
 
         public int logic(){
-            // ObjectProvider 타입의 getObject()를 호출하는 시점에 스프링 컨테이너에서 prototypeBean을 찾아서 반환 (DL 기능)
-            PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
+            // Provider 타입의 get()를 호출하는 시점에 스프링 컨테이너에서 prototypeBean을 찾아서 반환 (DL 기능)
+            PrototypeBean prototypeBean = prototypeBeanProvider.get();
             prototypeBean.addCount();
             return prototypeBean.getCount();
         }
