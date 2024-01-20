@@ -5,6 +5,8 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
@@ -14,7 +16,7 @@ public class HelloServlet extends HttpServlet {
     // Servlet이 호출되면 Service 메서드가 호출됨.
     // HTTP 요청이 오면 WAS(서블릿 컨테이너)가 request, response 객체를 만들어 서블릿에 던져줌.
     @Override
-    public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("HelloServlet.service");
         System.out.println("request = " + request); // WAS 서버가 구현한 서블릿 구현체
         System.out.println("response = " + response);
