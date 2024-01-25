@@ -2,7 +2,6 @@
 <%--for loop 편리하게 도는 기능 제공--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<html>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
