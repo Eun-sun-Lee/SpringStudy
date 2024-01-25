@@ -1,8 +1,8 @@
 package hello.servlet.web.frontcontroller.v1;
 
-import hello.servlet.web.controller.MemberFormControllerV1;
-import hello.servlet.web.controller.MemberListControllerV1;
-import hello.servlet.web.controller.MemberSaveControllerV1;
+import hello.servlet.web.frontcontroller.v1.controller.MemberFormControllerV1;
+import hello.servlet.web.frontcontroller.v1.controller.MemberListControllerV1;
+import hello.servlet.web.frontcontroller.v1.controller.MemberSaveControllerV1;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
