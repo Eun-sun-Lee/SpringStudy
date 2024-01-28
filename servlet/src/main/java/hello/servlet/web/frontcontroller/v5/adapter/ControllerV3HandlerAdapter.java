@@ -14,7 +14,7 @@ import java.util.Map;
 public class ControllerV3HandlerAdapter implements MyHandlerAdapter {
     @Override
     public boolean supports(Object handler) {
-        return (handler instanceof ControllerV3); // ControllerV3의 instance인지 물어봄.
+        return (handler instanceof ControllerV3); // Controller V3의 instance인지 물어봄.
     }
 
     @Override
