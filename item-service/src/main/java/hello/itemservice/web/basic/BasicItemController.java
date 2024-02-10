@@ -17,21 +17,24 @@ public class BasicItemController {
 
     private final ItemRepository itemRepository;
 
-    @GetMapping // 상품 목록
+    // 상품 목록
+    @GetMapping
     public String items(Model model) {
         List<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
         return "basic/items";
     }
 
-    @GetMapping("/{itemId}") // 상품 상세
+    // 상품 상세
+    @GetMapping("/{itemId}")
     public String item(@PathVariable("itemId") long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
         model.addAttribute("item", item);
         return "basic/item";
     }
 
-    @GetMapping("/add") // 상품 등록
+    // 상품 등록
+    @GetMapping("/add")
     public String addForm(){
         return "basic/addForm";
     }
@@ -71,6 +74,20 @@ public class BasicItemController {
 
         itemRepository.save(item);
         return "basic/item";
+    }
+
+    // 상품 수정
+    @GetMapping("/{itemId}/edit")
+    public String editForm(@PathVariable("itemId") Long itemId, Model model){
+        Item item = itemRepository.findById(itemId);
+        model.addAttribute("item", item);
+        return "basic/editForm";
+    }
+
+    @PostMapping("/{itemId}/edit")
+    public String edit(@PathVariable("itemId") Long itemId, @ModelAttribute Item item) {
+        itemRepository.update(itemId, item);
+        return "redirect:/basic/items/{itemId}";
     }
 
     /**
