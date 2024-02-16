@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/basic/items")
@@ -19,6 +21,16 @@ import java.util.List;
 public class BasicItemController {
 
     private final ItemRepository itemRepository;
+
+    // 해당 컨트롤러를 호출할 때, 항상 자동으로 model에 addAttribute하여 모델에 담김.
+    @ModelAttribute("regions")
+    public Map<String, String> regions(){
+        Map<String, String> regions = new LinkedHashMap<>(); // 순서 보장 위해 LinkedHashMap 사용
+        regions.put("SEOUL", "서울"); // key-value(사용자에게 보여주기 위한 용도)
+        regions.put("BUSAN", "부산");
+        regions.put("JEJU", "제주");
+        return regions;
+    }
 
     // 상품 목록
     @GetMapping
@@ -43,24 +55,10 @@ public class BasicItemController {
         return "basic/addForm";
     }
 
-//    @PostMapping("/add")
-    public String addItemV1(@RequestParam("itemName") String itemName, // 뷰의 속성 이름
-                       @RequestParam("price") int price,
-                       @RequestParam("quantity") Integer quantity,
-                       Model model){
-        Item item = new Item();
-        item.setItemName(itemName);
-        item.setPrice(price);
-        item.setQuantity(quantity);
-
-        itemRepository.save(item);
-        model.addAttribute("item", item);
-        return "basic/item";
-    }
-
     @PostMapping("/add")
     public String addItem(Item item, RedirectAttributes redirectAttributes){
         log.info("item.open={}", item.getOpen());
+        log.info("item.regions={}", item.getRegions());
         Item savedItem = itemRepository.save(item);
         // redirect와 관련된 속성
         redirectAttributes.addAttribute("itemId", savedItem.getId());
