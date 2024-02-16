@@ -2,6 +2,7 @@ package hello.itemservice.web.basic;
 
 import hello.itemservice.domain.item.Item;
 import hello.itemservice.domain.item.ItemRepository;
+import hello.itemservice.domain.item.ItemType;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,11 @@ public class BasicItemController {
         return regions;
     }
 
+    @ModelAttribute("itemTypes")
+    public ItemType[] itemTypes() { // enum
+        return ItemType.values();
+    }
+
     // 상품 목록
     @GetMapping
     public String items(Model model) {
@@ -59,6 +65,8 @@ public class BasicItemController {
     public String addItem(Item item, RedirectAttributes redirectAttributes){
         log.info("item.open={}", item.getOpen());
         log.info("item.regions={}", item.getRegions());
+        log.info("item.itemType={}", item.getItemType());
+
         Item savedItem = itemRepository.save(item);
         // redirect와 관련된 속성
         redirectAttributes.addAttribute("itemId", savedItem.getId());
