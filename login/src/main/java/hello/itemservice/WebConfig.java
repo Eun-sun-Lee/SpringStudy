@@ -3,6 +3,7 @@ package hello.itemservice;
 import hello.itemservice.web.filter.LogFilter;
 import hello.itemservice.web.filter.LoginCheckFilter;
 import hello.itemservice.web.interceptor.LogInterceptor;
+import hello.itemservice.web.interceptor.LoginCheckInterceptor;
 import jakarta.servlet.Filter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +20,10 @@ public class WebConfig implements WebMvcConfigurer {
                 .order(1)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/css/**", "/*.ico", "/error");
+        registry.addInterceptor(new LoginCheckInterceptor())
+                .order(2)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/", "/members/add", "/login", "/logout", "/css/**", "/*.ico", "/error");
     }
 
 //    @Bean
@@ -30,7 +35,7 @@ public class WebConfig implements WebMvcConfigurer {
         return filterFilterRegistrationBean;
     }
 
-    @Bean
+//    @Bean
     public FilterRegistrationBean loginCheckFilter(){ // 스프링 부트가 WAS를 띄울 때 필터를 넣어줌.
         FilterRegistrationBean<Filter> filterFilterRegistrationBean = new FilterRegistrationBean<>();
         filterFilterRegistrationBean.setFilter(new LoginCheckFilter());
